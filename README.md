@@ -14,10 +14,10 @@ you can classify your file by placing them in different directory,
 
 nested directory is accepted.
 
-## require:
+## requirement:
 
 for archlinux user, install texlive-latexextra
 
-default font is WenQuanYi Micro Hei
+default font is Source Code Pro
 
 # title is always NCTU\_Leonardo :p

@@ -4,8 +4,8 @@ all: main.tex
 
 main.tex:
 	cp temp.tex main.tex
-	./makecpp.sh src >> main.tex
-	./makedoc.sh doc >> main.tex
+	./makeTex.sh src >> main.tex
+	./makeTex.sh doc >> main.tex
 	echo '\end{document}' >> main.tex
 
 clean:

@@ -1,0 +1,48 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% this template is provided by https://github.com/tsaodingtw %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[12pt,a4paper,twocolumn]{extarticle}
+
+%\usepackage{xeCJK}
+\usepackage[twoside=false,top=10mm,bottom=15mm,left=10mm,right=10mm]{geometry}
+\usepackage[subfigure]{tocloft}
+\usepackage[svgnames]{xcolor}
+\usepackage[english]{babel}
+%\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{graphicx,indentfirst}
+\usepackage{listings,caption}
+\usepackage{fontspec,subfigure,float}
+\usepackage{verbatim}
+\setmainfont{WenQuanYi Micro Hei}
+%\usepackage{xeCJK}%字體(Chinese/Japanese/Korean)
+%\setCJKmainfont{Droid Sans Fallback}
+
+\lstset{
+    tabsize=4,
+    basicstyle=\ttfamily\scriptsize,
+    aboveskip={0\baselineskip},
+    columns=fixed,
+    showstringspaces=false,
+    extendedchars=true,
+    breaklines=true,
+    prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+    frame=none,
+    rulecolor=\color{Gray},
+    showtabs=false,
+    showspaces=false,
+    showstringspaces=true,
+    keywordstyle=\color{Blue},
+    commentstyle=\color{DarkGreen},
+    stringstyle=\color{Brown},
+}
+
+
+\begin{document}
+
+\title{NCTU_Leonardo}
+
+\renewcommand\cftsecleader{\cftdotfill{\cftdotsep}}
+\tableofcontents

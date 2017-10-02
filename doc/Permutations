@@ -1,0 +1,4 @@
+P(n, m) = n! / (n-m)!
+C(n, m) = n! / (n-m)! / m!
+C(n, m) = C(n-1, m) + C(n-1, m-1)
+H(n, m) = C(n+m-1, m)

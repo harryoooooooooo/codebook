@@ -40,8 +40,8 @@ class PerSegTree{
         now->range_r = r;
         if (l!=r){
             int mid = (l+r)/2;
-            build(&(now->L), l, mid, n, it);
-            build(&(now->R), mid+1, r, n, it);
+            build(now->L, l, mid, n, it);
+            build(now->R, mid+1, r, n, it);
             now->val = f(now->L->val, now->R->val);
         }
         else {
@@ -59,9 +59,9 @@ class PerSegTree{
         runPush(from);
         now = getNode(*from);
         int mid=(now->range_l+now->range_r)/2;
-        if (start <= mid) set(start, min(mid,end), diff, from->L, &(now->L));
+        if (start <= mid) set(start, min(mid,end), diff, from->L, now->L);
         else now->L = from->L;
-        if (end >= mid+1) set(max(mid+1,start), end, diff, from->R, &(now->R));
+        if (end >= mid+1) set(max(mid+1,start), end, diff, from->R, now->R);
         else now->R = from->R;
         now->val = f(now->L->val, now->R->val);
     }
@@ -79,7 +79,7 @@ public:
         root.push_back(nullptr);
         int bound;
         for(bound=1;bound<n;bound<<=1);
-        build(&root[0], 0, bound-1, n, it);
+        build(root[0], 0, bound-1, n, it);
     }
     /*
     template<class It>
@@ -99,7 +99,7 @@ public:
     }
     size_t set(size_t ver, int start, int end, const Tag& diff){
         root.push_back(nullptr);
-        set(start, end, diff, root[ver], &root.back());
+        set(start, end, diff, root[ver], root.back());
         return root.size()-1;
     }
 };
@@ -128,6 +128,7 @@ struct modType{
 };
 
 int main (){
+//    ** it is ZERO BASE **
 //    start & end are in [x,y] format (inclusively)
 //    PerSegTree<yee, int, mergeType, modType> pst(n, inputIterator());
 //    pst.set(start, end, diff);

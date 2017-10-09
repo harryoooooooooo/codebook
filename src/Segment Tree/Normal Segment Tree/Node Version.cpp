@@ -1,4 +1,3 @@
-#include <vector>
 #include <algorithm>
 using namespace std;
 
@@ -29,8 +28,8 @@ class RealSegTree{
         now->tag = Tag();
         if (l!=r){
             int mid = (l+r)/2;
-            build(&(now->L), l, mid, n, it);
-            build(&(now->R), mid+1, r, n, it);
+            build(now->L, l, mid, n, it);
+            build(now->R, mid+1, r, n, it);
             now->val = f(now->L->val, now->R->val);
         }
         else {
@@ -44,7 +43,7 @@ public:
     RealSegTree(int n, It it):f(), pushTag(){
         int bound;
         for(bound=1;bound<n;bound<<=1);
-        build(&root, 0, bound-1, n, it);
+        build(root, 0, bound-1, n, it);
     }
     /*
     template<class It>
@@ -93,6 +92,7 @@ struct addType{
 };
 
 int main (){
+//    ** it is ZERO BASE **
 //    start & end are in [x,y] format (inclusively)
 //    RealSegTree<int, int, minType, addType> stree(n, it);
 //    stree.set(start, end, diff);

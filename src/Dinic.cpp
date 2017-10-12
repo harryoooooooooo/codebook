@@ -1,4 +1,3 @@
-#include <set>
 #include <queue>
 #include <vector>
 #include <algorithm>
@@ -36,12 +35,12 @@ bool bfs(){
 	if(!inq[sink])return false;
 	return true;
 }
-bool visit[max_node];
+bool vis[max_node];
 int dfs(int now,int mf,int t){
 	if(now==t)return mf;
 	if(mf==0)return 0;
-	if(visit[now])return 0;
-	visit[now]=true;
+	if(vis[now])return 0;
+	vis[now]=true;
 	for(auto &e:ad[now]){
 		if(e.c>0&&d[now]==d[e.t]-1){
 			int f=dfs(e.t,min(e.c,mf),t);
@@ -57,10 +56,8 @@ int dfs(int now,int mf,int t){
 
 int flow(){
 	while(bfs()){
-		while(1){
-			fill(visit,visit+max_node,false);
-			if(!dfs(src,1000000000,sink))break;
-		}
+        do fill(vis,vis+max_node,false);
+        while (dfs(src,1000000000,sink));
 	}
 	int mf = 0;
 	for(const auto& e:ad[sink])
@@ -68,10 +65,10 @@ int flow(){
 	return mf;
 }
 
-void set_edge(int from, int to, int capasity){
+void set_edge(int from, int to, int cap){
 	int r1=ad[from].size();
 	int r2=ad[to].size();
-	ad[from].push_back({to,capasity,r2});
+	ad[from].push_back({to,cap,r2});
 	ad[to].push_back({from,0,r1});
 }
 

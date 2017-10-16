@@ -1,13 +1,14 @@
 #include<iostream>
 #include<iomanip>
+#include<array>
 using namespace std;
 
 template<int N>
 class bignum{
-    long long a[N+2];
+    array<long long,N+2> a;
     static const long long m = 1e8;
     void shift(int x){
-        for (int i=N-1;i>=x;i--)
+        for (int i=N;i>=x;i--)
             a[i] = a[i-x];
         for (int i=0;i<x;i++)
             a[i] = 0;
@@ -19,9 +20,13 @@ public:
         else {
             a[0] = x%m;
             a[1] = (x/m)%m;
-            a[3] = x/m/m;
+            a[2] = x/m/m;
         }
     }
+    bignum(const bignum<N> &) = default;
+    bignum(bignum<N> &&) = default;
+    bignum& operator=(const bignum<N> &) = default;
+    bignum& operator=(bignum<N> &&) = default;
     bignum<N>& operator+=(const bignum<N>& r){
         for (int i=0;i<N+1;i++){
             a[i]+=r.a[i];
@@ -59,19 +64,18 @@ public:
     }
     bignum<N> operator*(const bignum<N>& r)const{
         bignum<N> res;
-        for (int i=0;i<N;i++){
+        for (int i=0;i<N+1;i++){
             bignum<N> tmp = r;
             auto& b = tmp.a;
-            for (int j=0;j<N;j++)
+            for (int j=0;j<N+1;j++)
                 b[j] *= a[i];
-            for (int j=0;j<N;j++){
+            for (int j=0;j<N+1;j++){
                 b[j+1] += b[j]/m;
                 b[j] %= m;
             }
             tmp.shift(i);
             res += tmp;
         }
-        res.a[N] = (a[N]%2)^(r.a[N]%2) ? m-1 : 0;
         return res;
     }
     bignum<N>& operator*=(const bignum<N>& r){

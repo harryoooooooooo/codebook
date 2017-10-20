@@ -1,0 +1,10 @@
+列舉所有maximal clique
+
+BronKerbosch2(R,P,X):
+    if P and X are both empty:
+        report R as a maximal clique
+    choose a pivot vertex u in P `Uni` X
+    for each vertex v in P \ N(u):
+        BronKerbosch2(R `Uni` {v}, P `Int` N(v), X `Int` N(v))
+        P := P \ {v}
+        X := X `Uni` {v}

@@ -1,0 +1,82 @@
+Maximum Independent Set [NP-complete]
+無向圖上，點數最多的Maximum Independent Set。
+
+Maximum Independent Set in Tree [P]
+當給定的圖是樹，得利用Greedy Method求解。
+
+Maximum Independent Set in Bipartite Graph [P]
+當給定的圖是二分圖，得利用Maximum Cardinality Bipartite Matching求解。
+
+
+首先找到最大二分匹配，可以分類成三種情況：
+
+甲、X側未匹配點的交錯樹們。
+乙、Y側未匹配點的交錯樹們。
+丙、皆是已匹配點的交錯環們（包含單獨的匹配邊）。
+這三個情況互不干涉，是數塊連通分量。用 Graph Traversal 建立甲、乙的交錯樹們，剩下部分就是丙。
+
+在二分圖上，邊邊角角的點就是交錯樹的樹葉，而交錯樹的樹葉總是位於偶數距離。要找最大點獨立集，甲、乙是取盡偶數距離的點，丙是取盡偶數距離的點、或者是取盡奇數距離的點，每塊連通分量可以各自為政。最大獨立集的大小，就是匹配邊的數量加上未匹配點的數量。小心處理的話，可以得到字典順序最小的最大獨立集。
+
+已經有最大二分匹配時，求最大點獨立集的時間複雜度等同於一次 Graph Traversal 的時間。
+
+code 在 MISBG
+
+========================================
+
+Minimum Dominating Set [NP-complete]
+無向圖上點數最少的Dominating Set。
+
+Minimum Dominating Set in Tree [P]
+當給定的圖是樹，得利用DP求解。
+
+Minimum Dominating Set in Bipartite Graph [NP-complete]
+當給定的圖是二分圖。
+
+========================================
+
+Minimum Vertex Cover [NP-complete]
+一張圖上點數最少的Vertex Cover。
+
+Minimum Vertex Cover in Tree [P]
+當給定的圖是樹，得利用Greedy演算法，從樹葉往樹根方向選出節點。
+
+Minimum Vertex Cover in Bipartite Graph [P]
+當給定的圖是二分圖，得化作Maximum Cardinality Bipartite Matching解決。
+
+========================================
+
+Minimum Edge Cover [P]
+一張圖上邊數最少的Edge Cover。
+得化作Maximum Matching解決。
+
+Minimum Edge Cover in Bipartite Graph [P]
+當給定的圖是二分圖，得利用Greedy演算法，優先覆蓋degree最小的點。
+
+Minimum/Maximum Weight Edge Cover [P]
+一張圖上權重最小（大）的Edge Cover。
+得化作Minimum/Minimum Weight Matching解決。
+
+========================================
+
+General Graph:
+
+|Maximum Independent Set|      + |Minimum Vertex Cover| = |V|
+|Maximum Independent Edge Set| + |Minimum Edge Cover|   = |V|
+
+各種點獨立集、各種點覆蓋，恰好互補，一一對應。
+最大點獨立集、最小點覆蓋，兩者當然也是互補。
+各種邊獨立集（匹配）、各種邊覆蓋，沒有互補，沒有一一對應、。
+最大邊獨立集（最大匹配）、最小邊覆蓋，兩者幾乎相等，差異是未匹配點所連接的邊。
+
+Bipartite Graph:
+
+|Maximum Independent Set|       = |Minimum Edge Cover|
+|Maximum Independent Edge Set|  = |Minimum Vertex Cover|
+
+|Maximum Independent Set|      + |Minimum Vertex Cover| = |V|
+              +                             +
+|Maximum Independent Edge Set| + |Minimum Edge Cover|   = |V|
+
+             ||                            ||
+
+             |V|                           |V|

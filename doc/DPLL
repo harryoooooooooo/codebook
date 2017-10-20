@@ -1,11 +1,11 @@
-function DPLL(Φ)
-   if Φ is a consistent set of literals
+function DPLL(phi)
+   if phi is a consistent set of literals
        then return true;
-   if Φ contains an empty clause
+   if phi contains an empty clause
        then return false;
-   for every unit clause l in Φ
-      Φ ← unit-propagate(l, Φ);
-   for every literal l that occurs pure in Φ
-      Φ ← pure-literal-assign(l, Φ);
-   l ← choose-literal(Φ);
-   return DPLL(Φ ∧ l) or DPLL(Φ ∧ not(l));
+   for every unit clause l in phi
+      phi <- unit-propagate(l, phi);
+   for every literal l that occurs pure in phi
+      phi <- pure-literal-assign(l, phi);
+   l <- choose-literal(phi);
+   return DPLL(phi ^ l) or DPLL(phi ^ not(l));

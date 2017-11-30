@@ -1,5 +1,25 @@
 set sh=/bin/bash shiftwidth=4 et sts=4 ls=2 smd nu ts=4 ai
 syntax on
-nnoremap <F7> :w <bar> exec '!echo -n "case name: "; read CASE; cat > '.shellescape('%:r').'_$CASE.in' <CR>
-autocmd filetype cpp nnoremap <F8> :w <bar> exec '!echo "=========================v";g++ '.shellescape('%').' -std=c++14 -Wall -Wextra -Wshadow -pedantic -o '.shellescape('%:r').' && for i in $(ls \| grep '.shellescape('%:r').'_.*\\.in); do echo "======== $i ========";./'.shellescape('%:r').' < $i;done'<CR>
-autocmd filetype cpp nnoremap <F9> :w <bar> exec '!echo "=========================v";g++ '.shellescape('%').' -std=c++14 -Wall -Wextra -Wshadow -pedantic -o '.shellescape('%:r').' && ./'.shellescape('%:r').' '<CR>
+nnoremap <F7> : <bar> exec '!echo -n "case name: "; read CASE; cat > '.shellescape('%:r').'_$CASE.in'<CR>
+autocmd filetype cpp nnoremap <F8> :w <bar> exec '!./.script f8 '.shellescape('%:r').''<CR>
+autocmd filetype cpp nnoremap <F9> :w <bar> exec '!./.script f9 '.shellescape('%:r').''<CR>
+
+#!/bin/bash
+
+FLAG="-std=c++14 -Wall -Wextra -Wshadow -pedantic"
+
+f9(){
+    echo "=========================v"
+    g++ $1.cpp $FLAG -o $1 && ./$1
+}
+
+f8(){
+    echo "=========================v"
+    g++ $1.cpp $FLAG -o $1 && for i in $(ls | grep $1_.*\\.in)
+    do
+        echo "======== $i ========"
+        ./$1 < $i
+    done
+}
+
+"$1" "$2"

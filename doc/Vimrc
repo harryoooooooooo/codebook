@@ -1,13 +1,5 @@
-set sh=/bin/bash
-set shiftwidth=4
-set et
-set sts=4
-set ls=2
-set smd
-set nu
-set ts=4
-set ai
-
+set sh=/bin/bash shiftwidth=4 et sts=4 ls=2 smd nu ts=4 ai
 syntax on
-autocmd filetype cpp nnoremap <F8> :w <bar> exec '!echo "=========================>";g++ '.shellescape('%').' -std=c++14 -Wall -Wextra -Wshadow -pedantic -o '.shellescape('%:r').''<CR>
-autocmd filetype cpp nnoremap <F9> :w <bar> exec '!echo "v========================v";g++ '.shellescape('%').' -std=c++14 -Wall -Wextra -Wshadow -pedantic -o '.shellescape('%:r').';if [ $? == 0 ] ;then ./'.shellescape('%:r').'; fi '<CR>
+nnoremap <F7> :w <bar> exec '!echo -n "case name: "; read CASE; cat > '.shellescape('%:r').'_$CASE.in' <CR>
+autocmd filetype cpp nnoremap <F8> :w <bar> exec '!echo "=========================v";g++ '.shellescape('%').' -std=c++14 -Wall -Wextra -Wshadow -pedantic -o '.shellescape('%:r').' && for i in $(ls \| grep '.shellescape('%:r').'_.*\\.in); do echo "======== $i ========";./'.shellescape('%:r').' < $i;done'<CR>
+autocmd filetype cpp nnoremap <F9> :w <bar> exec '!echo "=========================v";g++ '.shellescape('%').' -std=c++14 -Wall -Wextra -Wshadow -pedantic -o '.shellescape('%:r').' && ./'.shellescape('%:r').' '<CR>

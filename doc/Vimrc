@@ -1,6 +1,6 @@
 set sh=/bin/bash shiftwidth=4 et sts=4 ls=2 smd nu ts=4 ai
 syntax on
-nnoremap <F7> : <bar> exec '!echo -n "case name: "; read CASE && cat > '.shellescape('%:r').'_$CASE.in'<CR>
+nnoremap <F7> : <bar> exec '!echo -n "case name: "; read CASE && vim '.shellescape('%:r').'_$CASE.in'<CR>
 autocmd filetype cpp nnoremap <F8> :w <bar> exec '!./.script f8 '.shellescape('%:r').''<CR>
 autocmd filetype cpp nnoremap <F9> :w <bar> exec '!./.script f9 '.shellescape('%:r').''<CR>
 
